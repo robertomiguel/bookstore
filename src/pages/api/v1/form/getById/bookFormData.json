@@ -1,0 +1,49 @@
+{
+    "form": { "maxWidth": "400px" },
+    "children": [
+        {
+            "name": "title",
+            "label": "Título",
+            "help": "Máximo 50 letras",
+            "rules": [
+                {
+                    "required": true,
+                    "message": "El título del libro es requerido"
+                }
+            ],
+            "render": "inputText",
+            "props": { "maxLength": 20 }
+        },
+        {
+            "name": "color",
+            "label": "Color",
+            "rules": [
+                {
+                    "required": true,
+                    "message": "Requiere un color"
+                }
+            ],
+            "render": "radioButton",
+            "props": { "buttonStyle": "solid", "style": { "marginTop": 16 } },
+            "data": {
+                "list": [
+                    { "value": "white", "text": "Blanco" },
+                    { "value": "red", "text": "Rojo" },
+                    { "value": "blue", "text": "Azul" },
+                    { "value": "green", "text": "Verde Fluo", "disabled": true }
+                ]
+            }
+        },
+        {
+            "name": "rate",
+            "label": "Calificación",
+            "rules": [
+                {
+                    "required": true,
+                    "message": "Dale una calificación"
+                }
+            ],
+            "render": "rate"
+        }
+    ]
+}

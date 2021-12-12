@@ -1,0 +1,9 @@
+{
+    "recommendations": [
+        "humao.rest-client",
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint",
+        "msjsdiag.debugger-for-chrome",
+        "wayou.vscode-todo-highlight"
+    ]
+}

@@ -1,0 +1,40 @@
+{
+    // Utilizar IntelliSense para aprender acerca de los posibles atributos.
+    // Mantenga el puntero para ver las descripciones de los existentes atributos
+    // Para más información, visite: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug backend",
+            "type": "node",
+            "request": "launch",
+            "args": ["${workspaceRoot}/packages/backend/src/main.ts"],
+            "runtimeArgs": [
+                "--max-http-header-size",
+                "80000",
+                "-r",
+                "ts-node/register",
+                "-r",
+                "tsconfig-paths/register"
+            ],
+            "cwd": "${workspaceRoot}/packages/backend",
+            "protocol": "inspector",
+            "internalConsoleOptions": "openOnSessionStart"
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Debug frontend",
+            "runtimeExecutable": "/usr/bin/chromium-browser",
+            "url": "http://localhost:8080",
+            "webRoot": "${workspaceRoot}/packages/frontend",
+            "sourceMapPathOverrides": {
+                // if you override this, you MUST provide all defaults again
+                "webpack:///./~/*": "${webRoot}/node_modules/*", // a default
+                "webpack:///./*": "${webRoot}/*", // unsure how/why webpack generates ./links.js
+                "webpack:///../*": "${webRoot}/*", // unsure how/why webpack generates ../links.js
+                "webpack:///*": "*" // a default, catch everything else
+            }
+        }
+    ]
+}
