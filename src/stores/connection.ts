@@ -1,6 +1,6 @@
 import axios, { Method } from 'axios'
 
-export const BASE_URL = 'http://localhost:3000/api/v1'
+export const BASE_URL = 'https://bookstore-eta.vercel.app/api/v1' // http://localhost:3000/
 
 const BASE_HEADER = {
     'Access-Control-Allow-Origin': '*',
