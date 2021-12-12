@@ -3,11 +3,13 @@
     "version": "1.0.0",
     "description": "",
     "main": "index.js",
+    "cacheDirectories": [
+        ".next/cache"
+    ],
     "scripts": {
         "dev": "next",
         "build": "next build",
         "start": "next start -p $PORT",
-        "heroku-postbuild": "npm run build",
         "debug": "npm --node-options=--inspect=0.0.0.0:9229 run dev"
     },
     "keywords": [],
