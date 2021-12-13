@@ -9,13 +9,13 @@ export const columnsForm: ColumnsType<IBookItem> = [
     {
         title: 'Portada',
         dataIndex: 'volumeInfo',
-        width: '15em',
+        width: '10em',
         key: generateId(),
         render: (value) => (
             <Image
                 src={value.imageLinks.smallThumbnail}
-                width={70}
-                height={150}
+                width={80}
+                height={100}
             />
         ),
     },

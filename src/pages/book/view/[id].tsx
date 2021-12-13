@@ -6,6 +6,7 @@ const Book = () => {
     return (
         <div>
             <h1>Ver Book con ID: {route.query.id}</h1>
+            <h2>No implementado</h2>
         </div>
     )
 }

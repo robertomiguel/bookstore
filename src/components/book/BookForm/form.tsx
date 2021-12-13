@@ -3,17 +3,18 @@ import { Button, Form, Popover } from 'antd'
 import { generateId } from 'common/generateId'
 import formComponents from 'components/renders/form'
 import { useCallback, useEffect, useState } from 'react'
-import { IBookStore } from 'stores/book'
+import { observer } from 'mobx-react-lite'
+import { useBookStore } from 'stores/book'
 
 interface BookFormProps {
     formRef: any // FormInstance
-    bookStore: IBookStore
     create: (value: any) => void
 }
 
-export const BForm = (props: BookFormProps) => {
-    const { formRef, bookStore, create } = props
+const BForm = observer((props: BookFormProps) => {
+    const { formRef, create } = props
     const [formBook, setFormBook] = useState<any>()
+    const bookStore = useBookStore()
 
     const submitButton = (
         <Button
@@ -25,9 +26,9 @@ export const BForm = (props: BookFormProps) => {
     )
 
     const getForm = useCallback(async () => {
-        const f = await bookStore.getForm('bookFormBasic')
+        const f = bookStore.form
         setFormBook(() => f)
-    }, [bookStore])
+    }, [bookStore.form])
 
     useEffect(() => {
         getForm()
@@ -55,36 +56,34 @@ export const BForm = (props: BookFormProps) => {
                 {resetButton}
             </Form.Item>
 
-            {formData &&
-                formData.children.map((component) => (
-                    <Form.Item
-                        key={generateId()}
-                        label={
-                            component.help ? (
-                                <span>
-                                    {component.label}
-                                    <Popover content={component.help}>
-                                        {' '}
-                                        <ExclamationCircleFilled />
-                                    </Popover>
-                                </span>
-                            ) : (
-                                component.label
-                            )
-                        }
-                        name={component.name}
-                        rules={component.rules}
-                    >
-                        {!component.data
-                            ? formComponentsList[component.render](
-                                  component.props
-                              )
-                            : formComponentsList[component.render](
-                                  component.data,
-                                  component.props
-                              )}
-                    </Form.Item>
-                ))}
+            {bookStore.form.children.map((component: any) => (
+                <Form.Item
+                    key={generateId()}
+                    label={
+                        component.help ? (
+                            <span>
+                                {component.label}
+                                <Popover content={component.help}>
+                                    {' '}
+                                    <ExclamationCircleFilled />
+                                </Popover>
+                            </span>
+                        ) : (
+                            component.label
+                        )
+                    }
+                    name={component.name}
+                    rules={component.rules}
+                >
+                    {!component.data
+                        ? formComponentsList[component.render](component.props)
+                        : formComponentsList[component.render](
+                              component.data,
+                              component.props
+                          )}
+                </Form.Item>
+            ))}
         </Form>
     )
-}
+})
+export default BForm

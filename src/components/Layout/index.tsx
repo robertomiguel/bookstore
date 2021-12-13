@@ -6,12 +6,12 @@ const Layout: React.FC = ({ children }) => {
     const { Header, Footer, Content } = LayoutAntD
     return (
         <LayoutAntD>
-            <Header>
+            <Header style={{ background: 'white' }}>
                 <Navbar />
             </Header>
-            <Content>{children}</Content>
+            <Content style={{ textAlign: 'center' }}>{children}</Content>
 
-            <Footer>Pie de página</Footer>
+            <Footer style={{ textAlign: 'center' }}>Pie de página</Footer>
         </LayoutAntD>
     )
 }

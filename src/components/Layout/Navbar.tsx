@@ -15,7 +15,6 @@ const Navbar = () => {
 
     useEffect(() => {
         getList()
-        console.log('pide menu')
     }, [getList])
 
     return (

@@ -1,12 +1,12 @@
-import React, { useCallback, useContext, useEffect } from 'react'
-import BookStore from 'stores/book'
+import React, { useCallback, useEffect } from 'react'
+import { useBookStore } from 'stores/book'
 import { Button, Table } from 'antd'
 import { columnsForm } from './columns'
-import { observer } from 'mobx-react-lite'
 import Link from 'next/link'
+import { observer } from 'mobx-react-lite'
 
 const BookTable = observer(() => {
-    const bookStore = useContext(BookStore)
+    const bookStore = useBookStore()
 
     const getList = useCallback(() => {
         bookStore.getList()
@@ -18,8 +18,8 @@ const BookTable = observer(() => {
 
     return (
         <div>
-            <div>
-                <Button style={{ float: 'right' }}>
+            <div style={{ margin: '15px' }}>
+                <Button type="primary" style={{ float: 'right' }}>
                     <Link href="/book/new">Nuevo libro</Link>
                 </Button>
             </div>

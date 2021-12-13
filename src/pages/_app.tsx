@@ -7,7 +7,7 @@ configure({
     enforceActions: 'never',
 })
 
-function MyApp({ Component, pageProps }: AppProps) {
+function App({ Component, pageProps }: AppProps) {
     return (
         <Layout>
             <Component {...pageProps} />
@@ -27,4 +27,4 @@ function MyApp({ Component, pageProps }: AppProps) {
 //   return { ...appProps }
 // }
 
-export default MyApp
+export default App
