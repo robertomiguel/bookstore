@@ -1,21 +1,14 @@
-import React, { useCallback, useEffect } from 'react'
-import { useBookStore } from 'stores/book'
+import React from 'react'
 import { Button, Table } from 'antd'
 import { columnsForm } from './columns'
 import Link from 'next/link'
-import { observer } from 'mobx-react-lite'
+import { IBook } from 'types/book'
 
-const BookTable = observer(() => {
-    const bookStore = useBookStore()
+interface Props {
+    book: IBook
+}
 
-    const getList = useCallback(() => {
-        bookStore.getList()
-    }, [bookStore])
-
-    useEffect(() => {
-        getList()
-    }, [getList])
-
+const BookTable = ({ book }: Props) => {
     return (
         <div>
             <div style={{ margin: '15px' }}>
@@ -23,18 +16,17 @@ const BookTable = observer(() => {
                     <Link href="/book/new">Nuevo libro</Link>
                 </Button>
             </div>
-            {bookStore.list.items && (
-                <Table
-                    loading={bookStore.isLoading}
-                    style={{ width: '100%' }}
-                    columns={columnsForm}
-                    dataSource={bookStore.list.items}
-                    size="middle"
-                    pagination={false}
-                    showSorterTooltip={false}
-                />
-            )}
+
+            <Table
+                loading={!book}
+                style={{ width: '100%' }}
+                columns={columnsForm}
+                dataSource={book.items || []}
+                size="middle"
+                pagination={false}
+                showSorterTooltip={false}
+            />
         </div>
     )
-})
+}
 export default BookTable

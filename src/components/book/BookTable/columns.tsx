@@ -11,13 +11,24 @@ export const columnsForm: ColumnsType<IBookItem> = [
         dataIndex: 'volumeInfo',
         width: '10em',
         key: generateId(),
-        render: (value) => (
-            <Image
-                src={value.imageLinks.smallThumbnail}
-                width={80}
-                height={100}
-            />
-        ),
+        render: (value) =>
+            value.imageLinks && value.imageLinks.smallThumbnail ? (
+                <Image
+                    src={value.imageLinks.smallThumbnail}
+                    width={80}
+                    height={100}
+                />
+            ) : (
+                <div
+                    style={{
+                        width: '80px',
+                        height: '100px',
+                        background: 'cyan',
+                    }}
+                >
+                    Sin Imagen
+                </div>
+            ),
     },
     {
         title: 'Título',

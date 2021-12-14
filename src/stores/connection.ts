@@ -1,6 +1,6 @@
 import axios, { Method } from 'axios'
 
-const PUBLIC_URL = 'https://bookstore-eta.vercel.app' // 'http://localhost:3000'
+const PUBLIC_URL = 'http://localhost:3000' // 'https://bookstore-eta.vercel.app'
 
 export const BASE_URL = `${PUBLIC_URL}/api/v1`
 
