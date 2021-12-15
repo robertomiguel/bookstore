@@ -33,7 +33,7 @@ export const BookForm = observer(() => {
 
     // carga del forumario inicial
     useEffect(() => {
-        changeFormLayout(formListDB.filter((f) => f.default)[0].name)
+        changeFormLayout('bookFormBasic')
     }, [changeFormLayout])
 
     return (

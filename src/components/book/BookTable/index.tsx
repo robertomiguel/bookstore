@@ -3,6 +3,7 @@ import { Button, Table } from 'antd'
 import { columnsForm } from './columns'
 import Link from 'next/link'
 import { IBook } from 'types/book'
+import { generateId } from 'common/generateId'
 
 interface Props {
     book: IBook
@@ -25,6 +26,7 @@ const BookTable = ({ book }: Props) => {
                 size="middle"
                 pagination={false}
                 showSorterTooltip={false}
+                rowKey={() => generateId()}
             />
         </div>
     )

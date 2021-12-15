@@ -17,6 +17,7 @@ export const columnsForm: ColumnsType<IBookItem> = [
                     src={value.imageLinks.smallThumbnail}
                     width={80}
                     height={100}
+                    alt="img"
                 />
             ) : (
                 <div

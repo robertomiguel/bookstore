@@ -1,32 +1,27 @@
 import { Menu } from 'antd'
 import { generateId } from 'common/generateId'
 import Link from 'next/link'
-import React, { useCallback, useEffect, useState } from 'react'
+import React from 'react'
 import { connection } from 'stores/connection'
+import useSWR from 'swr'
 import { IMainMenu } from 'types/menu'
 
 const Navbar = () => {
-    const [menuList, setMenuList] = useState<IMainMenu[]>([])
+    const fetcher = (url: string) => connection({}, 'POST', url)
+    const { data, error } = useSWR('/menu/list', fetcher)
 
-    const getList = useCallback(async () => {
-        const list = await connection({}, 'POST', '/menu/list')
-        setMenuList(() => list)
-    }, [])
-
-    useEffect(() => {
-        getList()
-    }, [getList])
+    if (error) return <div>Intente más tarde</div>
+    if (!data) return <div>Cargando...</div>
 
     return (
         <Menu mode="horizontal">
-            {menuList &&
-                menuList.map((menu) => (
-                    <Menu.Item key="app">
-                        <Link key={generateId()} href={menu.href}>
-                            {menu.label}
-                        </Link>
-                    </Menu.Item>
-                ))}
+            {data.map((menu: IMainMenu) => (
+                <Menu.Item key="app">
+                    <Link key={generateId()} href={menu.href}>
+                        {menu.label}
+                    </Link>
+                </Menu.Item>
+            ))}
         </Menu>
     )
 }
